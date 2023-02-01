@@ -16,14 +16,14 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping
+    @GetMapping()
     public List<Student> getStudents() {
         return studentService.getStudents();
     }
 
-    @PostMapping("/students")
-    public Student addStudent(@RequestBody Student student) {
-//        studentService.addStudent(student);
-        return student;
-    }
+//    @PostMapping("/students")
+//    public Student addStudent(@RequestBody Student student) {
+////        studentService.addStudent(student);
+//        return student;
+//    }
 }

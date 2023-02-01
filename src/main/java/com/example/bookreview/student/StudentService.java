@@ -19,6 +19,4 @@ public class StudentService {
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }
-
-
 }
