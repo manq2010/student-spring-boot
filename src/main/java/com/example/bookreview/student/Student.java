@@ -3,6 +3,7 @@ package com.example.bookreview.student;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import javax.validation.constraints.*;
 
 @Entity
 @Table
@@ -18,9 +19,15 @@ public class Student {
             generator = "student_sequence"
     )
     private Long id;
+    @NotBlank
     private String name;
+    @Email
     private String email ;
+    @Past
     private LocalDate dob;
+
+    @Min(18)
+    @Max(100)
     @Transient
     private Integer age;
 

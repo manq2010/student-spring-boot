@@ -43,8 +43,8 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
-    public void getStudentById(Long studentId) {
-        studentRepository.findById(studentId);
+    public Student getStudentById(Long studentId) {
+        return studentRepository.findById(studentId).orElse(null);
     }
 
     @Transactional
