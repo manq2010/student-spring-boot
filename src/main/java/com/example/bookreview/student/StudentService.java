@@ -4,8 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -43,5 +45,32 @@ public class StudentService {
 
     public void getStudentById(Long studentId) {
         studentRepository.findById(studentId);
+    }
+
+    @Transactional
+    public void updateStudent(Long studentId,
+                              String name,
+                              String email) {
+    Student student = studentRepository.findById(studentId)
+        .orElseThrow(() -> new IllegalStateException(
+                "student with id " + studentId + " does not exists"
+        ));
+
+    if(name != null &&
+            name.length() > 0 &&
+            !Objects.equals(student.getName(), name)){
+        student.setName(name);
+    }
+
+    if(email != null &&
+            name.length() > 0 &&
+            !Objects.equals(student.getEmail(), email)){
+        Optional<Student> studentOptional = studentRepository
+                .findStudentByEmail(email);
+        if(studentOptional.isPresent()){
+            throw new IllegalStateException("email taken");
+        }
+        student.setEmail(email);
+    }
     }
 }
