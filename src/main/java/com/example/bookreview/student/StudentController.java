@@ -21,6 +21,13 @@ public class StudentController {
         return studentService.getStudents();
     }
 
+    @GetMapping(path ="/{studentId}")
+    public void getStudentById(
+            @PathVariable("studentId") Long studentId) {
+//        return studentRepository.findById(id).orElse(null);
+        studentService.getStudentById(studentId);
+    }
+
     @PostMapping
     public void createStudent(@RequestBody Student student) {
         studentService.addNewStudent(student);
@@ -29,7 +36,6 @@ public class StudentController {
     @DeleteMapping(path = "/{studentId}")
     public void deleteStudent(
             @PathVariable("studentId") Long studentId) {
-//        studentRepository.deleteById(id);
         studentService.deleteStudent(studentId);
     }
 }

@@ -40,4 +40,8 @@ public class StudentService {
         }
         studentRepository.deleteById(studentId);
     }
+
+    public void getStudentById(Long studentId) {
+        studentRepository.findById(studentId);
+    }
 }
